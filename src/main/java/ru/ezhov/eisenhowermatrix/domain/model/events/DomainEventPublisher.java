@@ -25,8 +25,10 @@ public class DomainEventPublisher {
 
     public <T> void publish(final T domainEvent) {
         List<DomainEventSubscriber<T>> domainEventSubscribers = subscriberMap.get(domainEvent.getClass());
-        for (DomainEventSubscriber domainEventSubscriber : domainEventSubscribers) {
-            domainEventSubscriber.handleEvent(domainEvent);
+        if (domainEventSubscribers != null) {
+            for (DomainEventSubscriber domainEventSubscriber : domainEventSubscribers) {
+                domainEventSubscriber.handleEvent(domainEvent);
+            }
         }
     }
 }

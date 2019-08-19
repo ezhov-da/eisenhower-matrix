@@ -16,6 +16,7 @@ public class TaskCreatedWindow extends JDialog {
     private TaskCreatedPanel taskCreatedPanel = new TaskCreatedPanel();
 
     public TaskCreatedWindow() {
+        this.setTitle("Создать задачу");
         DomainEventPublisher.instance().subscribe(new DomainEventSubscriber<TaskCreated>() {
             @Override
             public void handleEvent(TaskCreated event) {

@@ -4,6 +4,8 @@ import ru.ezhov.eisenhowermatrix.domain.model.events.DomainEventPublisher;
 import ru.ezhov.eisenhowermatrix.domain.model.task.events.TaskCreated;
 import ru.ezhov.eisenhowermatrix.domain.model.task.events.TaskEdited;
 
+import java.util.Objects;
+
 public class Task {
     private TaskId taskId;
     private String name;
@@ -60,5 +62,18 @@ public class Task {
     public static void create(NewTask newTask, TaskRepository taskRepository) {
         TaskId taskId = taskRepository.add(newTask);
         DomainEventPublisher.instance().publish(new TaskCreated(taskId));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return Objects.equals(taskId, task.taskId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(taskId);
     }
 }

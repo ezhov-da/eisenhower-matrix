@@ -8,7 +8,7 @@ public interface TaskGroupRepository {
 
     List<TaskGroup> tasks();
 
-    void add(NewTaskGroup taskGroup);
+    TaskGroupId add(NewTaskGroup taskGroup);
 
     void save(TaskGroup taskGroup);
 

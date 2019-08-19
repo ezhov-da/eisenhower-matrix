@@ -15,8 +15,8 @@ public class InMemoryTaskGroupRepository implements TaskGroupRepository {
     private InMemoryTaskGroupRepository() {
     }
 
-    public static InMemoryTaskGroupRepository instance(){
-        if(inMemoryTaskGroupRepository == null){
+    public static InMemoryTaskGroupRepository instance() {
+        if (inMemoryTaskGroupRepository == null) {
             inMemoryTaskGroupRepository = new InMemoryTaskGroupRepository();
         }
         return inMemoryTaskGroupRepository;
@@ -34,9 +34,10 @@ public class InMemoryTaskGroupRepository implements TaskGroupRepository {
         return new ArrayList<>(tasks.values());
     }
 
-    public void add(NewTaskGroup newTaskGroup) {
-        String id = newId();
-        tasks.put(id, new TaskGroup(new TaskGroupId(id), newTaskGroup.name()));
+    public TaskGroupId add(NewTaskGroup newTaskGroup) {
+        TaskGroupId taskGroupId = new TaskGroupId(newId());
+        tasks.put(taskGroupId.id(), new TaskGroup(taskGroupId, newTaskGroup.name(), newTaskGroup.color()));
+        return taskGroupId;
     }
 
     @Override
